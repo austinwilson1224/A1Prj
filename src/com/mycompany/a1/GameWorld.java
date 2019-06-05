@@ -18,16 +18,23 @@ public class GameWorld {
     private ArrayList<GameObject> objects = new ArrayList<>();
     private PlayerShip playerShip;
     private NonPlayerShip nonPlayerShip;
-    private boolean livePlayerShip;
+
+
+    //private boolean livePlayerShip;
+
+
     private int numberOfLives;
-    private int liveScore;
+    private int playerScore;
     private int numMissiles;
+    private final static int MAX_MISSILES = 10;
 
 
 
 
     public void init(){
-        //TODO
+        numberOfLives = 3;
+        playerScore = 0;
+        numMissiles = MAX_MISSILES;
     }
 
 

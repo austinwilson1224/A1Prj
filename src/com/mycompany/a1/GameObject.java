@@ -22,17 +22,13 @@ public abstract class GameObject {
     }
 
 
-    /**
-     *
-     * Don't know if we really need these
-     *
+
     public double getX(){
         return location.getX();
     }
     public double getY(){
         return location.getY();
     }
-     */
 
 
     public int getColor(){
