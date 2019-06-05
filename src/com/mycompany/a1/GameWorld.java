@@ -7,7 +7,6 @@ import java.util.ArrayList;
 /**
  * This is the GameWorld class
  *
- * controller
  *
  *
  * Austin Wilson & Elianna Sanchez
@@ -15,8 +14,10 @@ import java.util.ArrayList;
 
 public class GameWorld {
 
+    public final static double HEIGHT = 1024.0;
+    public final static double WIDTH = 768.0;
     private ArrayList<GameObject> objects = new ArrayList<>();
-    private PlayerShip playerShip;
+    private static PlayerShip playerShip;
     private NonPlayerShip nonPlayerShip;
 
 
@@ -26,6 +27,8 @@ public class GameWorld {
     private int numberOfLives;
     private int playerScore;
     private int numMissiles;
+
+
     private final static int MAX_MISSILES = 10;
 
 
@@ -73,8 +76,8 @@ public class GameWorld {
 
     //y
     public void addNonPlayerShip(){
-        NonPlayerShip NPS = new NonPlayerShip();
-        objects.add(NPS);
+        NonPlayerShip nonPlayerShip = new NonPlayerShip();
+        objects.add(nonPlayerShip);
         System.out.println("New non player ship has been created");
     }
 
@@ -93,8 +96,10 @@ public class GameWorld {
             System.out.print("NO SHIP IN GAME");
             return;
         }
-        playerShip.fireMissiles();
-        System.out.println("Missile fired!");
+        if(playerShip.getMissileCount()>0){
+            playerShip.fireMissiles();
+            System.out.println("Missile fired!");
+        }
     }
 
 
@@ -113,12 +118,17 @@ public class GameWorld {
     //m
     public void printMap(){
         //TODO
+        for(int i = 0;i < objects.size();i++){
+            //System.out.println("SLDKFJSD:FLJSD:FLKJSDF:LKSDJF:LKSDJ");
 
-        //traverse through objects and print all information out
+        }
+        System.out.println(objects.size());
+        /*/traverse through objects and print all information out
 
         for(int i = 0; i < objects.size();i++){
             System.out.println(objects.get(i).toString());
         }
+        */
     }
 
 

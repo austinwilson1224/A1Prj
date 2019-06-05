@@ -14,6 +14,7 @@ public class Asteroid extends MovableGameObject {
 
         //size  = random value between 6 and 30
         this.size = GameObject.R.nextInt(SIZE_MAX - SIZE_MIN + 1) + SIZE_MIN;
+
         super.setColor(ColorUtil.BLACK);
     }
     @Override

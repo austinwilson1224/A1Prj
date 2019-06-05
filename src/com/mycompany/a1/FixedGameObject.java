@@ -4,7 +4,6 @@ package com.mycompany.a1;
 /**
  * Fixed Game Objects and such
  *
- * THIS IS A TEST
  *
  * Austin Wilson & Elianna Sanchez
  */

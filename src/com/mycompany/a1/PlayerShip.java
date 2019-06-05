@@ -8,7 +8,9 @@ public class PlayerShip extends Ship implements ISteerable{
     //constructor
     public PlayerShip(){
         this.setLocation(512,384);
-        super.setMissileCount(10);
+        this.setSpeed(0);
+        this.setDirection(0);
+        this.setMissileCount(10);
     }
 
 
@@ -41,5 +43,14 @@ public class PlayerShip extends Ship implements ISteerable{
 
     public void fireMissiles() {
         decrementMissileCount();
+    }
+    @Override
+    public String toString(){
+        return ("Player Ship: loc = " + getX() + "," + getY() +
+                " color = " + getColor() +
+                " speed = " + getSpeed() +
+                " dir = " + getDirection() +
+                " missile count = " + getMissileCount()
+        );
     }
 }
