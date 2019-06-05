@@ -44,14 +44,41 @@ public class Game extends Form {
 
 
                     //second delivery
-                    //June
+                    //June 5th
+
+
+                    //make a new asteroid...
                     case 'a':
+                        gw.loadNewAsteroid();
+                        break;
+
+                    //add a non player ship to the GameWorld
                     case 'y':
+                        gw.addNonPlayerShip();
+                        break;
                     case 'b':
+                        gw.addSpaceStation();
+                        break;
                     case 's':
+                        gw.addPlayerShip();
+                        break;
+
+                    //fire a missile out of PS
                     case 'f':
+                        gw.fireMissilePS();
+                        break;
+
+
+                    //fire a missile out of NPS
                     case 'L':
+                        gw.fireMissileNPS();
+                        break;
+
+
+                    //print a map showing the current world state
                     case 'm':
+                        gw.printMap();
+                        break;
 
 
 

@@ -2,11 +2,14 @@ package com.mycompany.a1;
 
 import com.codename1.ui.geom.Point2D;
 
+
+
 /**
  * Austin Wilson & Elianna Sanchez
  */
 
 public abstract class GameObject {
+    protected static final java.util.Random R = new java.util.Random(); //Random value used by child class
     private Point2D location;
     private int color;
 
@@ -18,12 +21,20 @@ public abstract class GameObject {
         return location.toString();
     }
 
-    public double getLocationX(){
+
+    /**
+     *
+     * Don't know if we really need these
+     *
+    public double getX(){
         return location.getX();
     }
-    public double getLocationY(){
+    public double getY(){
         return location.getY();
     }
+     */
+
+
     public int getColor(){
         //code this later
         return this.color;
@@ -32,8 +43,7 @@ public abstract class GameObject {
 
     //setters
     public void setLocation(double x, double y){
-        location.setX(x);
-        location.setY(y);
+        location = new Point2D(x,y);
     }
     public void setColor(int color){
         this.color = color;
