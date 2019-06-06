@@ -2,22 +2,24 @@ package com.mycompany.a1;
 
 
 /**
- * Movable Game Object homies!
+ * Movable Game Object
  *
- * Austin Wilson & Elianna Sanchez ie BAUStin and GirlScout
+ *
+ *
+ * Austin Wilson & Elianna Sanchez
  */
 public abstract class MovableGameObject extends GameObject implements Imovable {
     private int speed;
     private int direction;
-    private final int MINSPEED = 0;
-    private final int MAXSPEED = 20;
-    private final int MINDIRECTION = 0;
-    private final int MAXDIRECTION = 359;
+    private final int MIN_SPEED = 0;
+    private final int MAX_SPEED = 20;
+    private final int MIN_DIRECTION = 0;
+    private final int MAX_DIRECTION = 359;
 
 
     public MovableGameObject(){
-        this.speed = R.nextInt(MAXSPEED - MINSPEED + 1) + MINSPEED;
-        this.direction = R.nextInt(MAXDIRECTION - MINDIRECTION + 1) + MINDIRECTION;
+        this.speed = R.nextInt(MAX_SPEED - MIN_SPEED + 1) + MIN_SPEED;
+        this.direction = R.nextInt(MAX_DIRECTION - MIN_DIRECTION + 1) + MIN_DIRECTION;
     }
 
 
