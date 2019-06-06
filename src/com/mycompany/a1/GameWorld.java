@@ -2,6 +2,7 @@ package com.mycompany.a1;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
@@ -17,8 +18,11 @@ public class GameWorld {
     public final static double HEIGHT = 1024.0;
     public final static double WIDTH = 768.0;
     private ArrayList<GameObject> objects = new ArrayList<>();
+
+
     private static PlayerShip playerShip;
-    private NonPlayerShip nonPlayerShip;
+
+    private static NonPlayerShip nonPlayerShip;
 
 
     //private boolean livePlayerShip;
@@ -76,9 +80,9 @@ public class GameWorld {
 
     //y
     public void addNonPlayerShip(){
-        NonPlayerShip nonPlayerShip = new NonPlayerShip();
+        nonPlayerShip = new NonPlayerShip();
         objects.add(nonPlayerShip);
-        System.out.println("New non player ship has been created");
+        System.out.println("New non-player ship has been created");
     }
 
 
@@ -118,12 +122,24 @@ public class GameWorld {
     //m
     public void printMap(){
         //TODO
+        Iterator<GameObject> iterator = this.objects.iterator();
+
+
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+
+
+
+
+        /*
+
         for(int i = 0;i < objects.size();i++){
             //System.out.println("SLDKFJSD:FLJSD:FLKJSDF:LKSDJF:LKSDJ");
-
+            System.out.println(objects.get(i).toString());
         }
         System.out.println(objects.size());
-        /*/traverse through objects and print all information out
+        /traverse through objects and print all information out
 
         for(int i = 0; i < objects.size();i++){
             System.out.println(objects.get(i).toString());
