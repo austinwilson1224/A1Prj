@@ -9,11 +9,12 @@ import com.codename1.ui.geom.Point2D;
 
 public abstract class GameObject {
     protected static final java.util.Random R = new java.util.Random(); //Random value used by child class
-    private Point2D location = new Point2D(0.0, 0.0);
+    private Point2D location;
     private int color;
 
 
     //constructor
+    //initialize objects to the center of the world
     public GameObject(){
         location = new Point2D(GameWorld.WIDTH/2F,GameWorld.HEIGHT/2F);
     }
@@ -48,6 +49,12 @@ public abstract class GameObject {
     }
     public void setColor(int color){
         this.color = color;
+    }
+    public void setX(double x){
+        this.location.setX(x);
+    }
+    public void setY(double y){
+        this.location.setY(y);
     }
 
 

@@ -16,7 +16,6 @@ public class Asteroid extends MovableGameObject {
         super();
         this.size = GameObject.R.nextInt(SIZE_MAX - SIZE_MIN + 1) + SIZE_MIN;
         super.setLocation(R.nextDouble() * GameWorld.WIDTH ,R.nextDouble());
-
         super.setColor(ColorUtil.BLACK);
     }
     @Override
