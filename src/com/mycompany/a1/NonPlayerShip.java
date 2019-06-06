@@ -11,7 +11,7 @@ public class NonPlayerShip extends Ship {
     private ArrayList<Integer> sizeList = new ArrayList<>();
 
 
-    public NonPlayerShip(){
+    public void NonPlayerShip(){
         super.setMissileCount(4);
 
         //I am adding the two sizes to an arrayList, shuffling it and then assigning size to the first element
