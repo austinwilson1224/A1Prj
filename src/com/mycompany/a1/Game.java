@@ -38,7 +38,7 @@ public class Game extends Form {
         myTextField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                String sCommand =  myTextField.getText().toString();
+                String sCommand =  myTextField.getText();
                 myTextField.clear();
                 switch (sCommand.charAt(0)){
 

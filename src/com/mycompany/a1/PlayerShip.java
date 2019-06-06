@@ -7,6 +7,7 @@ public class PlayerShip extends Ship implements ISteerable{
 
     //constructor
     public PlayerShip(){
+        super();
         this.setLocation(512,384);
         this.setSpeed(0);
         this.setDirection(0);

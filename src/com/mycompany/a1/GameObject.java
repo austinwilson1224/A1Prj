@@ -13,6 +13,13 @@ public abstract class GameObject {
     private int color;
 
 
+    //constructor
+    //initialize objects to the center of the world
+    public GameObject(){
+        location = new Point2D(GameWorld.WIDTH/2F,GameWorld.HEIGHT/2F);
+    }
+
+
     //methods
 
     //getters
@@ -42,6 +49,12 @@ public abstract class GameObject {
     }
     public void setColor(int color){
         this.color = color;
+    }
+    public void setX(double x){
+        this.location.setX(x);
+    }
+    public void setY(double y){
+        this.location.setY(y);
     }
 
 
