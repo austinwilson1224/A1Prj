@@ -124,27 +124,29 @@ public class GameWorld {
         //TODO
         Iterator<GameObject> iterator = this.objects.iterator();
 
-
+/**
         while(iterator.hasNext()){
             System.out.println(iterator.next());
-        }
+        }*/
 
 
 
 
-        /*
+
 
         for(int i = 0;i < objects.size();i++){
-            //System.out.println("SLDKFJSD:FLJSD:FLKJSDF:LKSDJF:LKSDJ");
             System.out.println(objects.get(i).toString());
         }
-        System.out.println(objects.size());
-        /traverse through objects and print all information out
 
-        for(int i = 0; i < objects.size();i++){
-            System.out.println(objects.get(i).toString());
-        }
-        */
+
+
+
+
+        //System.out.println(objects.size());
+        //traverse through objects and print all information out
+
+
+
     }
 
 

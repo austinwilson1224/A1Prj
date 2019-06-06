@@ -9,8 +9,14 @@ import com.codename1.ui.geom.Point2D;
 
 public abstract class GameObject {
     protected static final java.util.Random R = new java.util.Random(); //Random value used by child class
-    private Point2D location;
+    private Point2D location = new Point2D(0.0, 0.0);
     private int color;
+
+
+    //constructor
+    public GameObject(){
+        location = new Point2D(GameWorld.WIDTH/2F,GameWorld.HEIGHT/2F);
+    }
 
 
     //methods
