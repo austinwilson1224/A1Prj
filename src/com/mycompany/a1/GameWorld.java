@@ -1,8 +1,9 @@
 package com.mycompany.a1;
 
 
+import com.codename1.ui.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 
 /**
@@ -96,13 +97,27 @@ public class GameWorld {
 
     //f
     public void fireMissilePS(){
+
+
+        //precondition is to check that the playerShip is in GameWorld
         if(playerShip == null){
             System.out.print("NO SHIP IN GAME");
             return;
         }
-        if(playerShip.getMissileCount()>0){
-            playerShip.fireMissiles();
-            System.out.println("Missile fired!");
+        else if (playerShip.getMissileCount() == 0){
+            System.out.println("Out of missiles");
+            return;
+        }
+        else {
+            /**
+             * compute missile location, speed, and heading
+             */
+            Point2D missileLocation = playerShip.getLocation();
+            //ship speed plus constant value is 5
+            int missileSpeed = playerShip.getSpeed() + 5;
+            int missileHeading = playerShip.getDirection();
+            Missile missile = new Missile(missileSpeed,missileHeading,missileLocation);
+            objects.add(missile);
         }
     }
 
@@ -122,9 +137,10 @@ public class GameWorld {
     //m
     public void printMap(){
         //TODO
+        /*
         Iterator<GameObject> iterator = this.objects.iterator();
 
-/**
+
         while(iterator.hasNext()){
             System.out.println(iterator.next());
         }*/

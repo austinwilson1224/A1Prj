@@ -23,8 +23,12 @@ public abstract class GameObject {
     //methods
 
     //getters
-    public String getLocation(){
+    /*public String getLocation(){
         return location.toString();
+    }
+    */
+    public Point2D getLocation(){
+        return location;
     }
 
 
