@@ -275,6 +275,8 @@ public class GameWorld {
 
 	
 	/**
+	 * method e
+	 * 
 	 * this is the method that will kill and NPS
 	 * if a missile is fired from a player ship 
 	 * and it hit a NPS in game world then both instances of
@@ -282,7 +284,7 @@ public class GameWorld {
 	 * 
 	 * not sure if its necessary to search through the list of objects in the world f
 	 * for both objects 
-	 * shold just search for the correct NPS and then eliminate both objects
+	 * should just search for the correct NPS and then eliminate both objects
 	 */
 
 	public void eliminateNPS() {
@@ -313,10 +315,12 @@ public class GameWorld {
 	
 	
 	/**
+	 * method associated with E 
+	 * 
 	 * this method will be synonymous with eliminateNPS
 	 * instead of NPS we will have a PlayerShip (PS)
 	 * 
-	 * 
+	 * finished 
 	 */
 	public void eliminatePS() {
 		//declaring these here so we have access
@@ -357,5 +361,32 @@ public class GameWorld {
 	public void tick() {
 		//TODO
 	}
+	
+	
+	
+	/**
+	 * these methods will be auxiliary method for finding certain objects in the objects list
+	 */
+	
+	
+	public Asteroid findAsteroid() {
+		Asteroid asteroid = null;
+		for(GameObject i : objects) {
+			if(i instanceof Asteroid) {
+				//i = (Asteroid)objects.get(i);
+				
+			}
+		}
+		return asteroid;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

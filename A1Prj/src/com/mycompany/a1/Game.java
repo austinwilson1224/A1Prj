@@ -159,7 +159,10 @@ public class Game extends Form {
                         break;
                         
                     /**
-                     * NPS's missile has struck and exploded a PS; 
+                     * NPS's missile has struck and exploded a PS
+                     * 
+                     * 
+                     * 
                      */
                     case 'E':
                     	gw.eliminatePS();
