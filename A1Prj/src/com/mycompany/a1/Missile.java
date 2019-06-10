@@ -14,15 +14,27 @@ public class Missile extends MovableGameObject {
         super.setLocation(missileLocation.getX(),missileLocation.getY());
         fuelLevel = 15;
     }
+    
+    //setter
+    public void setFuelLevel(int level) {
+    	if(level < 0)
+    		return;
+    	else if(level + fuelLevel > 15)
+    		return;
+    	else fuelLevel = level;
+    }
+    
+    //getter
+    public int getFuelLevel() {
+    	return this.fuelLevel;
+    }
 
 
     public void decrementFuelLevel(){
-        fuelLevel--;
-    }
-
-    @Override
-    public void move() {
-        //TODO
+    	if(this.fuelLevel > 0) {
+    		fuelLevel--;
+    
+    	}
     }
 
     @Override

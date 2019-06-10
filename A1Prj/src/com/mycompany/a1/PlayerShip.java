@@ -28,40 +28,14 @@ public class PlayerShip extends Ship implements ISteerable{
         
     }
 
-
-    public void increaseSpeed(){
-        //TODO
-    	//super.setSpeed(super.getSpeed() + 1);
-    }
-    public void decreaseSpeed(){
-        //TODO
-    	//super.setSpeed(super.getSpeed() - 1);
-    }
-    public void turnRight(){
-        //TODO
-    }
-    public void turnLeft(){
-        //TODO
-    }
     public void reloadMissiles(){
-        //TODO
+        super.setMissileCount(10);
     }
     
     
     //getter
     public SteerableMissileLauncher getLauncher() {
     	return this.launcher;
-    }
-
-
-
-
-
-
-
-    @Override
-    public void move() {
-
     }
 
     public boolean fireMissiles() {
@@ -75,6 +49,24 @@ public class PlayerShip extends Ship implements ISteerable{
     		return false;
     	}
         
+    }
+    
+    
+    
+    
+    //interfaces and overwritten methods 
+    
+    @Override
+    public void turnLeft() {
+    	if(this.getDirection() == 0) {
+    		this.setDirection(359);
+    	}else this.setDirection(this.getDirection() + 1);
+    }
+    @Override
+    public void turnRight() {
+    	if(this.getDirection() == 359) {
+    		this.setDirection(0);
+    	}else this.setDirection(this.getDirection() - 1);
     }
     @Override
     public String toString(){

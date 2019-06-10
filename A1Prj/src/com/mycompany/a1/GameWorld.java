@@ -62,20 +62,61 @@ public class GameWorld {
         numberOfLives = 3;
         playerScore = 0;
         numMissiles = MAX_MISSILES;
+        timeElapsed = 0;
     }
 
 
+    /**
+     * make sure the payer ship is not null
+     * 
+     * increase speed comes from movable game object 
+     * 
+     */
     public void increasePSSpeed(){
-        //TODO
+        if(this.playerShip != null) {
+        	this.playerShip.increaseSpeed();
+        }
     }
     public void decreasePSSpeed(){
-        //TODO
+        if(this.playerShip != null) {
+        	playerShip.decreaseSpeed();
+        }
     }
     public void turnPSRight(){
-        //TODO
+        if(playerShip!=null) {
+        	playerShip.turnRight();
+        	/*
+        	if(playerShip.getDirection() == 350) {
+        		playerShip.setDirection(0);
+        	}else playerShip.setDirection(playerShip.getDirection() + 1);
+        	*/
+        }
     }
+    
+    
+    
+    /**
+     * 
+     * from user command 'l'
+     * this is ell not I 
+     * this command should turn the PS left by a small amount
+     * change the heading of the ship by a small amount in the counter-clockwise direction
+     * 
+     * should check to see if the current heading is at 359, then the new heading would be 0
+     * otherwise the heading should just add one 
+     * 
+     * finished
+     */
     public void turnPSLeft(){
-        //TODO
+        if(playerShip != null) {
+        	playerShip.turnLeft();
+        	/*
+        	int heading = playerShip.getDirection();
+        	if(heading == 0)
+        		playerShip.setDirection(359);
+        	else playerShip.setDirection(heading - 1);
+        	*/
+        }
     }
 
 
@@ -126,9 +167,7 @@ public class GameWorld {
         //this will only return true if the ship has missiles available to fire
         if (playerShip.fireMissiles()){
 
-            /**
-             * compute missile location, speed, and heading
-             */
+            //compute missile location, speed, and heading
             Point2D missileLocation = playerShip.getLocation();
             //ship speed plus constant value is 5
             double missileSpeed = playerShip.getSpeed() + 5.0;
@@ -140,11 +179,8 @@ public class GameWorld {
         }
     }
 
-
-    //L
-    
-    
     /**
+     * method associated with 'L'
      * first check to see that there is a NPS in the game
      * if so then we will fire the missiles, since that method already checks to see that the ship has missiles available to fire
      * then create a new missile to add to the game world 
@@ -167,8 +203,6 @@ public class GameWorld {
         	System.out.println(missile);
         }
 
-
-
     }
 
 
@@ -178,22 +212,22 @@ public class GameWorld {
         for(int i = 0;i < objects.size();i++){
             System.out.println(objects.get(i).toString());
         }
+        System.out.println("\n");
     }
 
     public void print(){
-        System.out.println("Player Score: " + playerScore);
+        System.out.println("\nPlayer Score: " + playerScore);
         if(playerShip != null){
             System.out.println("Number of missiles: " + playerShip.getMissileCount());
         }else System.out.println("Number of missiles: No ships..");
-        //long timeElapsed = System.nanoTime() - PROGRAM_CREATION;
-        //System.out.println("Current time elapsed: " + timeElapsed);
-        System.out.println("Number of lives: " + numberOfLives);
+        System.out.println("Current time elapsed: " + timeElapsed);
+        System.out.println("Number of lives: " + numberOfLives + "\n");
     }
 
 
     
     /**
-     * from the case where user input is g
+     * from the case where user input is j
      * this will cause the location to be reset to the center of the map
      * which is located at (512,384)
      */
@@ -218,11 +252,10 @@ public class GameWorld {
 	 */
 	public void revolvePSML() {
 		//first check that the player ship exists in game 
-		if(playerShip != null) {
-			playerShip.setDirection(playerShip.getDirection() + 1);
+		if(playerShip != null) {			
+			playerShip.getLauncher().setDirection(playerShip.getLauncher().getDirection() + 1);
 		}
-		else System.out.println("No player ship in the game");
-		
+		else System.out.println("No player ship in the game");	
 	}
 
 
@@ -242,14 +275,12 @@ public class GameWorld {
 	 * 
 	 * first check that 
 	 * 
-	 * 
 	 *  The program is not required to have any code that actually checks for collisions between objects; 
 	 *  that’s something we’ll be adding later. 
 	 *  For now, the program simply relies on the user to say when such events have occurred, 
 	 *  using for example the ‘k’ and ‘c’ commands.
 	 * 
 	 * 
-	
 	 */
 	public void killAsteroid() {
 		Missile missile = null;
@@ -259,12 +290,10 @@ public class GameWorld {
 			if(i instanceof Missile) {
 				missile = (Missile)i;
 			}
-		}
-		for(GameObject i : objects) {
-			if (i instanceof Asteroid) {
+			else if(i instanceof Asteroid)
 				asteroid = (Asteroid)i;
-			}
 		}
+
 		//make sure the for loop instanciated missile and asteroid 
 		//then check that they have the same location --- unnecessary 
 		if( (missile != null && asteroid != null)) {
@@ -345,21 +374,129 @@ public class GameWorld {
 		}
 	}
 	
+	
+	
+	
+	/**
+	 * method associated with 'c'
+	 * ship has crashed into an asteroid 
+	 * in this case remove the ship and the asteroid from the world
+	 * don't worry about which asteroid for now...
+	 * 
+	 * if there are more lives left decrement lives 
+	 * and add a new playerShip into the world...?
+	 * 
+	 */
 	public void crashAsteroid() {
-		//TODO
+		Asteroid asteroid = this.findAsteroid();
+		PlayerShip ps = this.findPlayerShip();
+		//if(asteroid != null && playerShip != null) {
+		objects.remove(playerShip);
+		objects.remove(asteroid);
+		if(this.numberOfLives > 0) {
+			this.numberOfLives--;
+			playerShip = new PlayerShip();
+			objects.add(playerShip);
+		}
+			//this code will never print out 
+		else System.out.println("0 lives, GAME OVER!");
+		
 	}
 	
+	
+	/**
+	 * method associated with 'h'
+	 * PS has crashed into an NPS
+	 * tell game world to remove the NPS (and the PS?) and decrement the number of lives 
+	 * 
+	 * finished 
+	 */
 	public void crashNPS() {
-		//TODO
+		NonPlayerShip NPS = this.findNonPlayerShip();
+		objects.remove(NPS);
+		objects.remove(playerShip);
+		if(this.numberOfLives > 0) {
+			numberOfLives--;
+			playerShip = new PlayerShip();
+			objects.add(playerShip);
+		}
+		else System.out.println("0 lives, GAME OVER!");
 	}
+	
+	
+	/**
+	 * method associated with the 'x' command 
+	 * two asteroids have collided into each other 
+	 * 
+	 * 
+	 * first check that there are at least two asteroids in gameworld using asteroid count
+	 * then remove two asteroids 
+	 * 
+	 * finished
+	 */
 	public void asteroidCrash() {
-		//TODO
+		if(this.asteroidCount() > 1) {
+			
+		
+			Asteroid a1 = this.findAsteroid();
+			objects.remove(a1);
+			Asteroid a2 = this.findAsteroid();
+			objects.remove(a2);
+		}
 	}
+
+	
+	/**
+	 * associated with the player input 'I'
+	 * 
+	 * one asteroid have collided and impacted the NPS
+	 * tell the game world to remove them from the game 
+	 * 
+	 * choose one asteroid and one NPS to be remove worry about which ones later 
+	 */
 	public void asteroidCrashNPS() {
-		//TODO
+		objects.remove(findAsteroid());
+		objects.remove(findNonPlayerShip());
 	}
+	
+	/**
+	 * user input 't' 
+	 * 
+	 * tell the game world the the "game clock" has ticked so increment timeElapsed by 1 
+	 * 1. all movable objects are told to update their positions 
+	 * 2. every missile's fuel level is reduced by one and 
+	 * 	any missiles which are now out of fuel are removed from the game
+	 * 3. each space stations toggles its blinking light if the tick count modulo 
+	 * 	the stations blink rate is zero
+	 * 4. the "elapsed game time" is incremented by one 
+	 * 
+	 * will traverse all the objects and execute all of these cases 
+	 */
 	public void tick() {
-		//TODO
+		for(GameObject i : objects) {
+			
+			//1 update all movable objects positions 
+			if(i instanceof Imovable) {
+				((Imovable) i).move();
+			}
+			
+			//2 update all missiles fuel levels 
+			if(i instanceof Missile) {
+				if(((Missile)i).getFuelLevel() == 0) {
+					objects.remove(i);
+				}
+				else ((Missile)i).decrementFuelLevel();
+			}
+			
+			//3 toggle space stations blinker 
+			if(i instanceof SpaceStation) {
+				//this is the 
+				if(timeElapsed % ((SpaceStation)i).getBlinkRate()  == 0)
+					((SpaceStation)i).toggleBlinker();
+			}
+			//4 increment time elapsed by 1 
+			timeElapsed++;
+		}
 	}
 	
 	
@@ -370,15 +507,44 @@ public class GameWorld {
 	
 	
 	public Asteroid findAsteroid() {
-		Asteroid asteroid = null;
+		
 		for(GameObject i : objects) {
 			if(i instanceof Asteroid) {
-				//i = (Asteroid)objects.get(i);
+				return (Asteroid) i;
 				
 			}
 		}
-		return asteroid;
+		return null;
 	}
+	public int asteroidCount() {
+		int count = 0;
+		for(GameObject i : objects) {
+			if(i instanceof Asteroid) {
+				count++;
+			}
+		}
+		return count;
+		
+	}
+	
+	public PlayerShip  findPlayerShip() {
+		for(GameObject i : objects) {
+			if(i instanceof PlayerShip) {
+				return (PlayerShip) i;
+			}
+		}
+		return null;
+	}
+	
+	public NonPlayerShip findNonPlayerShip() {
+		for(GameObject i : objects) {
+			if(i instanceof NonPlayerShip) {
+				return (NonPlayerShip) i;
+			}
+		}
+		return null;
+	}
+		
 	
 	
 	

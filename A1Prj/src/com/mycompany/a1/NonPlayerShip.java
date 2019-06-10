@@ -39,13 +39,6 @@ public class NonPlayerShip extends Ship {
     		return false;
     	}
     }
-
-    @Override
-    public void move() {
-        //TODO
-    }
-
-
     
     //missile count comes from Ship
     @Override

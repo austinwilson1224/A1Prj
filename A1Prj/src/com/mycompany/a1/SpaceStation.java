@@ -20,7 +20,15 @@ public class SpaceStation extends FixedGameObject {
      */
     public SpaceStation(){
         this.blinkRate = GameObject.R.nextInt(MAXBLINKRATE - MINBLINKRATE );
+        this.blinkerOn = true;
         super.setColor(225, 225, 225); //white
+    }
+    
+    //setter
+    public void toggleBlinker() {
+    	if(this.blinkerOn) {
+    		this.blinkerOn = false;
+    	}else this.blinkerOn = true;
     }
 
     //methods

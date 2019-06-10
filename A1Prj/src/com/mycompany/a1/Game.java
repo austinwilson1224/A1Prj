@@ -1,4 +1,5 @@
 package com.mycompany.a1;
+import com.codename1.ui.Display;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
@@ -77,7 +78,14 @@ public class Game extends Form {
                     	gw.decreasePSSpeed();
                     	break;
                     	
-                    //turn PS left by a small amount (ell)
+                    /**
+                     * turn PS left by a small amount (ell)
+                     * method increments the PlayerShips direction by 1
+                     * if the player ship is in direction 359 it resets to zero 
+                     * 
+                     * 
+                     * finished 
+                     */
                     case 'l': 
                     	gw.turnPSLeft();
                     	break;
@@ -161,26 +169,42 @@ public class Game extends Form {
                     /**
                      * NPS's missile has struck and exploded a PS
                      * 
-                     * 
+                     * finished 
                      * 
                      */
                     case 'E':
                     	gw.eliminatePS();
                     	break;
                     	
-                    //PS crashed into an asteroid
+                    /**
+                     * PS crashed into an asteroid
+                     * tell game world to remove the ship and an asteroid and to decrement the count of lives left 
+                     * if no lives are left then the game is over
+                     * you may choose any asteroid to be removed 
+                     * later we'll worry about asteroids needing to be close to the ship
+                     * 
+                     * finished 
+                     */
                     case 'c':
                     	gw.crashAsteroid();
                     	break;
                     
                     	
-                    //PS has hit an NPS				
+                    /**
+                     * PS has hit an NPS
+                     * 		
+                     * finished		
+                     */
                     case 'h':
                     	gw.crashNPS();
                     	break;
                     	
                     	
-                    //two asteroids have collided
+                    /**
+                     * two asteroids have collided
+                     * 
+                     * finished 
+                     */
                     case 'x':
                     	gw.asteroidCrash();
                     	break;
@@ -190,7 +214,17 @@ public class Game extends Form {
                     	gw.asteroidCrashNPS();
                     	break;
                     	
-                    //game world game clock has ticked
+                    /**
+                     * game world game clock has ticked
+                     * 
+                     * has the effect of 
+                     * 1. all movable objects are told to update their positions 
+                     * 2. every missile's fuel level is reduced by one and 
+                     * 	any missiles which are now out of fuel are removed from the game
+                     * 3. each space stations toggles its blinking light if the tick count modulo 
+                     * the stations blink rate is zero
+                     * 4. the "elapsed game time" is incremented by one 
+                     */
                     case 't':
                     	gw.tick();
                     	break;
@@ -202,7 +236,10 @@ public class Game extends Form {
                     	gw.jump();
                     	break;
                     	
-                    //
+                    //quit the game 
+                    case 'q':
+                    	quit();
+                    	break;
 
 
                 }
@@ -212,6 +249,6 @@ public class Game extends Form {
 
 
     private void quit(){
-        //code later
+        System.exit(0);
     }
 }
