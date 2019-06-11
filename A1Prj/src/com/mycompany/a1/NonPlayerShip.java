@@ -12,6 +12,7 @@ public class NonPlayerShip extends Ship {
     	//NPS starts with 4 missiles and is red
         super.setMissileCount(4);
         super.setColor(225, 0, 0);
+        super.setLocation(R.nextDouble() * GameWorld.WIDTH, R.nextDouble() * GameWorld.HEIGHT);
         //randomly setting the size to large or small using random number 0-1
         int small = 15, large = 25, rand = R.nextInt(2);
         if(rand == 0) {

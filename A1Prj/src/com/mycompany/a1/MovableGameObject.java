@@ -48,6 +48,9 @@ public abstract class MovableGameObject extends GameObject implements Imovable {
     
     
     public void setDirection(int direction){
+    	if(direction > 359 || direction < 0) {
+    		return;
+    	}
         this.direction = direction;
     }
 

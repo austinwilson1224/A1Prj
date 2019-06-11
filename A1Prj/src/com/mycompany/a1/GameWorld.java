@@ -253,7 +253,7 @@ public class GameWorld {
 	public void revolvePSML() {
 		//first check that the player ship exists in game 
 		if(playerShip != null) {			
-			playerShip.getLauncher().setDirection(playerShip.getLauncher().getDirection() + 1);
+			playerShip.getLauncher().setDirection(playerShip.getLauncher().getDirection() + 10);
 		}
 		else System.out.println("No player ship in the game");	
 	}
@@ -262,6 +262,7 @@ public class GameWorld {
 	public void reloadPS() {
 		if(playerShip != null) {
 			playerShip.setMissileCount(MAX_MISSILES);
+			System.out.println("Player Ship missiles resupplied");
 		}
 		else System.out.println("NO player ship in game");
 		
@@ -283,6 +284,10 @@ public class GameWorld {
 	 * 
 	 */
 	public void killAsteroid() {
+		if(playerShip == null) {
+			System.out.println("No player ship in game!");
+			return;
+		}
 		Missile missile = null;
 		Asteroid asteroid = null;
 		
@@ -294,11 +299,12 @@ public class GameWorld {
 				asteroid = (Asteroid)i;
 		}
 
-		//make sure the for loop instanciated missile and asteroid 
+		//make sure the for loop instantiated missile and asteroid 
 		//then check that they have the same location --- unnecessary 
 		if( (missile != null && asteroid != null)) {
 			objects.remove(asteroid);
 			objects.remove(missile);
+			System.out.println("Player ship killed an asteroid!");
 		}
 	}
 
@@ -318,6 +324,11 @@ public class GameWorld {
 
 	public void eliminateNPS() {
 		
+		
+		if(playerShip == null) {
+			System.out.println("No player ship in game!");
+			return;
+		}
 		//declaring these here so we have access
 		NonPlayerShip NPS = null;
 		Missile missile = null;
@@ -337,6 +348,7 @@ public class GameWorld {
 		if(missile != null && NPS != null) {
 			objects.remove(missile);
 			objects.remove(NPS);
+			System.out.println("Player ship missile killed NPS!");
 		}
 		
 	}
@@ -349,9 +361,15 @@ public class GameWorld {
 	 * this method will be synonymous with eliminateNPS
 	 * instead of NPS we will have a PlayerShip (PS)
 	 * 
+	 * NPS's missile has struck and killed a PS
+	 * 
 	 * finished 
 	 */
 	public void eliminatePS() {
+		if(playerShip == null) {
+			System.out.println("No player ship in game!");
+			return;
+		}
 		//declaring these here so we have access
 		PlayerShip PS = null;
 		Missile missile = null;
@@ -360,17 +378,25 @@ public class GameWorld {
 			if(i instanceof PlayerShip) {
 				PS = (PlayerShip) i;
 			}
-		}
-		//find the missile in question and assign it to missile
-		for(GameObject i : objects) {
-			if(i instanceof Missile) {
+			else if(i instanceof Missile) {
 				missile = (Missile) i;
+
+				
 			}
 		}
 				
 		if(missile != null && PS != null) {
 			objects.remove(missile);
 			objects.remove(PS);
+			System.out.println("Non player ship missile eliminated player ship!");
+			
+			if(numberOfLives == 0) {
+				playerShip = null;
+				System.out.println("GAME OVER");
+			}else {
+				numberOfLives--;
+				playerShip = new PlayerShip();
+			}
 		}
 	}
 	
@@ -379,7 +405,7 @@ public class GameWorld {
 	
 	/**
 	 * method associated with 'c'
-	 * ship has crashed into an asteroid 
+	 * playerShip has crashed into an asteroid 
 	 * in this case remove the ship and the asteroid from the world
 	 * don't worry about which asteroid for now...
 	 * 
@@ -388,18 +414,24 @@ public class GameWorld {
 	 * 
 	 */
 	public void crashAsteroid() {
+		if(playerShip == null) {
+			System.out.println("No player ship in game!");
+			return;
+		}
 		Asteroid asteroid = this.findAsteroid();
-		PlayerShip ps = this.findPlayerShip();
-		//if(asteroid != null && playerShip != null) {
 		objects.remove(playerShip);
 		objects.remove(asteroid);
+		System.out.println("Player ship crashed into an asteroid!");
 		if(this.numberOfLives > 0) {
 			this.numberOfLives--;
 			playerShip = new PlayerShip();
 			objects.add(playerShip);
 		}
 			//this code will never print out 
-		else System.out.println("0 lives, GAME OVER!");
+		else {
+			playerShip = null;
+			System.out.println("0 lives, GAME OVER!");
+		}
 		
 	}
 	
@@ -412,15 +444,29 @@ public class GameWorld {
 	 * finished 
 	 */
 	public void crashNPS() {
+		if(playerShip == null) {
+			System.out.println("No player ship in game!");
+			return;
+		}
 		NonPlayerShip NPS = this.findNonPlayerShip();
-		objects.remove(NPS);
-		objects.remove(playerShip);
+		if(NPS != null) {
+			objects.remove(NPS);
+			objects.remove(playerShip);
+			System.out.println("PlayerShip has crashed into a non player ship");
+		}
+		else {
+			System.out.println("No NPS in game");
+			return;
+		}
 		if(this.numberOfLives > 0) {
 			numberOfLives--;
 			playerShip = new PlayerShip();
 			objects.add(playerShip);
 		}
-		else System.out.println("0 lives, GAME OVER!");
+		else {
+			playerShip = null;
+			System.out.println("0 lives, GAME OVER!");
+		}
 	}
 	
 	
@@ -442,6 +488,7 @@ public class GameWorld {
 			objects.remove(a1);
 			Asteroid a2 = this.findAsteroid();
 			objects.remove(a2);
+			System.out.println("Two asteroids have collided!");
 		}
 	}
 
@@ -455,8 +502,19 @@ public class GameWorld {
 	 * choose one asteroid and one NPS to be remove worry about which ones later 
 	 */
 	public void asteroidCrashNPS() {
-		objects.remove(findAsteroid());
-		objects.remove(findNonPlayerShip());
+		Asteroid asteroid = findAsteroid();
+		NonPlayerShip NPS = findNonPlayerShip();
+		if(asteroid != null && NPS != null) {
+			objects.remove(findAsteroid());
+			objects.remove(findNonPlayerShip());
+			System.out.println("Asteroid collided into a non player ship!");
+		}
+		else if(asteroid == null) {
+			System.out.println("No asteroid in game!");
+		}
+		else if(NPS == null) {
+			System.out.println("No NPS is game!");
+		}
 	}
 	
 	/**
