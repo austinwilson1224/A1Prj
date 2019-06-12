@@ -61,11 +61,23 @@ public abstract class MovableGameObject extends GameObject implements Imovable {
     	
     	//to convert degrees to radians 
     	double conversion = Math.PI / 180;
+    	
+    	
     	double x = this.getLocation().getX();
     	double y = this.getLocation().getY();
+    	
+    	
+    	
+    	
     	System.out.println("\nPrevious location: " + x + "," + y + "\n");
     	
-    	y += (this.getSpeed() * Math.cos( conversion * (double)this.getDirection()));
+    	
+    	
+    	y -= (this.getSpeed() * Math.cos( conversion * (double)this.getDirection()));
+    	
+    	
+    	
+    	
     	x += (this.getSpeed() * Math.sin( conversion * (double)this.getDirection()));
     	this.setLocation(x, y);
     	System.out.println("\nNew location: " + x + "," + y + "\n");
